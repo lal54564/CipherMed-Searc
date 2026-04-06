@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypted Cloud Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="glass-container header">
+        <h1>🔒 Secure Encrypted Document Retrieval</h1>
+        <p>A Privacy-Preserving k-NN Demo. The Cloud Server never sees your plaintext data.</p>
+        <button id="reset-btn" class="secondary-btn">Reset Keys & Database</button>
+    </div>
+
+    <div class="main-grid">
+        
+        <!-- Left Column: Hospital Client Controls -->
+        <div class="column client-side">
+            <h2 class="section-title"><span class="badge">Local Hospital Client</span></h2>
+            
+            <div class="glass-card">
+                <h3>1. Upload Medical Record</h3>
+                <p class="subtitle">Data is encrypted via AES and vectors are secured locally before leaving your browser.</p>
+                <textarea id="upload-text" placeholder="e.g., Patient John Doe. Diagnosis: Type 2 Diabetes. Prescription: Metformin 500mg daily..."></textarea>
+                <button id="upload-btn" class="primary-btn">Encrypt & Upload to Cloud</button>
+            </div>
+
+            <div class="glass-card">
+                <h3>3. Search Records Securely</h3>
+                <p class="subtitle">Query vectors are securely transformed. The cloud matches them purely mathematically.</p>
+                <input type="text" id="search-query" placeholder="e.g., Metformin prescription for diabetes">
+                <button id="search-btn" class="primary-btn pulse">Compute Secure Dot Product</button>
+            </div>
+            
+            <div class="glass-card result-card" id="result-box" style="display: none;">
+                <h3>🎉 Decrypted Result</h3>
+                <div class="result-stats">
+                    <span id="res-id">Match ID: -</span>
+                    <span id="res-score">Mathematical Score: -</span>
+                </div>
+                <div class="plaintext-output" id="res-text">
+                    <!-- Decrypted text goes here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Cloud Server View -->
+        <div class="column cloud-side">
+             <h2 class="section-title"><span class="badge cloud">Untrusted Cloud Server</span></h2>
+             
+             <div class="glass-card db-card">
+                 <h3>2. Encrypted Database View</h3>
+                 <p class="subtitle">This is exactly what the server stores. It cannot be read without the massive local M1/M2 matrices and AES key.</p>
+                 
+                 <div class="table-container">
+                     <table id="db-table">
+                         <thead>
+                             <tr>
+                                 <th>ID</th>
+                                 <th>AES Ciphertext (Preview)</th>
+                                 <th>Encrypted Vector Part A (Snippet)</th>
+                                 <th>Encrypted Vector Part B (Snippet)</th>
+                             </tr>
+                         </thead>
+                         <tbody id="db-body">
+                             <!-- Rows populated by JS -->
+                         </tbody>
+                     </table>
+                 </div>
+                 <div id="empty-state" class="empty-state">No records uploaded yet.</div>
+             </div>
+        </div>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
